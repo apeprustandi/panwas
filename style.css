@@ -125,7 +125,9 @@ h8 {
 .form button:hover {
   background: #F1C27B;
 }
-
+table {
+  font-size: 10px;
+}
 /*Responsive*/
 @media screen and (max-width: 500px) {
   .form .column {

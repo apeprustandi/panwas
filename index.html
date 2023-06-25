@@ -32,12 +32,10 @@
       </div>
       <div class="column">
         <div class="input-box">
-          <label>Jam Otomatis</label>
-          <input id="jam-piket" type="time" readonly required />
-        </div>
-        <div class="input-box">
-          <label>Tanggal Otomatis</label>
-          <input id="tanggal-piket" type="date" readonly required />
+          <center>
+            <h7 id="waktu-piket"></h7>
+            <h8 id="ip-message"></h8>
+          </center>
         </div>
       </div>
       <div class="input-box-camera">
@@ -61,29 +59,29 @@
     }
 
     function checkIP() {
-      const allowedIP = '114.5.217.171'; // Ganti dengan alamat IP yang diperbolehkan
+      const allowedIP = '114.5.217.171'; // Change this to the allowed IP address
+      const ipMessage = document.getElementById('ip-message');
 
       getIP(ip => {
         if (ip !== allowedIP) {
-          window.location.href = 'bolos.html';
+          ipMessage.innerText = 'Anda sedang tidak dikantor !!!';
+          document.getElementById('submit-btn').disabled = true;
         }
       });
     }
 
     window.onload = checkIP;
 
-    var inputJam = document.getElementById("jam-piket");
+    var inputWaktuPiket = document.getElementById("waktu-piket");
     var waktuSaatIni = new Date();
     var jam = waktuSaatIni.getHours();
     var menit = waktuSaatIni.getMinutes();
     var waktuFormatted = (jam < 10 ? "0" + jam : jam) + ":" + (menit < 10 ? "0" + menit : menit);
-    // Mengatur nilai input dengan waktu lokal
-    inputJam.value = waktuFormatted;
 
-    var inputTanggal = document.getElementById("tanggal-piket");
     var currentDate = new Date();
     var formattedDate = currentDate.toISOString().split("T")[0];
-    inputTanggal.value = formattedDate;
+    var waktuPiket = "Waktu Absen: " + waktuFormatted + " | " + formattedDate + "\n";
+    inputWaktuPiket.innerText = waktuPiket;
 
     function submitForm(event) {
       event.preventDefault(); // Prevent the form from submitting normally
@@ -95,7 +93,6 @@
       if (nama === '' || jabatan === '' || tanggalpiket === '' || jampiket === '') {
         alert('Mohon lengkapi semua field sebelum mengirim.');
       } else {
-        // All fields are filled, redirect to "berhasil.html"
         window.location.href = 'berhasil.html';
       }
     }

@@ -65,7 +65,7 @@
 
       getIP(ip => {
         if (ip !== allowedIP) {
-          ipMessage.innerText = 'Anda sedang tidak dikantor !!!';
+          ipMessage.innerText = 'Anda sedang tidak dikantor !!!\n';
           document.getElementById('submit-btn').disabled = true;
         } else {
           document.getElementById('submit-btn').disabled = false;

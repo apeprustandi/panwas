@@ -41,7 +41,7 @@
       <div class="input-box-camera">
         <video id="camera" width="150" height="150" autoplay></video>
       </div>
-      <button type="submit" id="submit-btn">Absen Sekarang</button>
+      <button type="submit" id="submit-btn" disabled>Absen Sekarang</button>
     </form>
   </section>
 
@@ -59,13 +59,15 @@
     }
 
     function checkIP() {
-      const allowedIP = '114.5.217.171'; // Change this to the allowed IP address
+      const allowedIP = '114.5.217.175'; // Ubah dengan alamat IP yang diperbolehkan
       const ipMessage = document.getElementById('ip-message');
 
       getIP(ip => {
         if (ip !== allowedIP) {
           ipMessage.innerText = 'Anda sedang tidak dikantor !!!';
           document.getElementById('submit-btn').disabled = true;
+        } else {
+          document.getElementById('submit-btn').disabled = false;
         }
       });
     }
@@ -84,13 +86,11 @@
     inputWaktuPiket.innerText = waktuPiket;
 
     function submitForm(event) {
-      event.preventDefault(); // Prevent the form from submitting normally
+      event.preventDefault(); // Mencegah form untuk melakukan pengiriman secara normal
       var nama = document.getElementById('nama').value;
       var jabatan = document.getElementById('jabatan').value;
-      var jampiket = document.getElementById('jam-piket').value;
-      var tanggalpiket = document.getElementById('tanggal-piket').value;
 
-      if (nama === '' || jabatan === '' || tanggalpiket === '' || jampiket === '') {
+      if (nama === '' || jabatan === '') {
         alert('Mohon lengkapi semua field sebelum mengirim.');
       } else {
         window.location.href = 'berhasil.html';

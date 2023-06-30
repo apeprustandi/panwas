@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/svg+xml" href="asset/icon.svg">
+  <title>Panwaslu Kecamatan Cibinong</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <section class="container">
+    <div class="centered-image"><img src="asset/logo.png" alt="Logo" /></div>
+    <!-- <header>ABSENSI PIKET</header> -->
+    <form action="#" class="form" onsubmit="submitForm(event)">
+      <div class="input-box">
+        <label>Nama Lengkap</label>
+        <input id="nama" type="text" placeholder="Masukkan nama lengkap" required />
+      </div>
+      <div class="column">
+        <div class="input-box address">
+          <label>Jabatan</label>
+          <div class="select-box">
+            <select id="jabatan" required>
+              <option hidden>Pilih Jabatan</option>
+              <option>PKD Batulawang</option>
+              <option>PKD Ciburial</option>
+              <option>PKD Cikangkareng</option>
+              <option>PKD Cimaskara</option>
+              <option>PKD Girijaya</option>
+              <option>PKD Hamerang</option>
+              <option>PKD Mekarmukti</option>
+              <option>PKD Padasuka</option>
+              <option>PKD Pamoyanan</option>
+              <option>PKD Pananggapan</option>
+              <option>PKD Panyindangan</option>
+              <option>PKD Sukajadi</option>
+              <option>PKD Sukamekar</option>
+              <option>PKD Wargaluyu</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="input-box">
+          <center>
+            <h7 id="waktu-piket"></h7>
+            <h8 id="ip-message"> </h8>
+            <a href="jadwal.html">Lihat Jadwal</a>
+          </center>
+        </div>
+      </div>
+      <div class="input-box-camera">
+        <video id="camera" width="150" height="150" autoplay></video>
+      </div>
+      <button type="submit" id="submit-btn" disabled>Absen Sekarang</button>
+    </form>
+  </section>
+
+  <script>
+    function getIP(callback) {
+      const url = 'https://api.ipify.org?format=json';
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const ip = data.ip;
+          callback(ip);
+        });
+    }
+
+    function checkIP() {
+      const allowedIP = '114.124.238.240';
+      const ipMessage = document.getElementById('ip-message');
+      getIP(ip => {
+        if (ip !== allowedIP) {
+          ipMessage.innerText = 'Anda sedang tidak dikantor !!!\n';
+          document.getElementById('submit-btn').disabled = true;
+        } else {
+          document.getElementById('submit-btn').disabled = false;
+        }
+      });
+    }
+    window.onload = checkIP;
+
+    var inputWaktuPiket = document.getElementById("waktu-piket");
+    var waktuSaatIni = new Date();
+    var jam = waktuSaatIni.getHours();
+    var menit = waktuSaatIni.getMinutes();
+    var waktuFormatted = (jam < 10 ? "0" + jam : jam) + ":" + (menit < 10 ? "0" + menit : menit);
+
+    var currentDate = new Date();
+    var formattedDate = currentDate.toISOString().split("T")[0];
+    var waktuPiket = "Waktu Absen: " + waktuFormatted + " | " + formattedDate + "\n";
+    inputWaktuPiket.innerText = waktuPiket;
+
+    function submitForm(event) {
+      event.preventDefault(); // Mencegah form untuk melakukan pengiriman secara normal
+      var nama = document.getElementById('nama').value;
+      var jabatan = document.getElementById('jabatan').value;
+
+      if (nama === '' || jabatan === '') {
+        alert('Mohon lengkapi semua field sebelum mengirim.');
+      } else {
+        window.location.href = 'berhasil.html';
+      }
+    }
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function (stream) {
+        var video = document.getElementById('camera');
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch(function (error) {
+        console.log('Unable to access the camera: ', error);
+      });
+  </script>
+</body>
+
+</html>

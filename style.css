@@ -13,7 +13,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 15px;
   background: #FFE4A7;
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 .container .form {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .form .input-box {
@@ -105,7 +105,7 @@ body {
   color: #000;
   font-size: 1rem;
   font-weight: 400;
-  margin-top: 20px;
+  margin-top: 15px;
   font-weight: bold;
   border: none;
   cursor: pointer;
@@ -114,21 +114,48 @@ body {
   border-radius: 8px;
 }
 
-h3 {
-  color: red;
+.font-lain {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: small;
 }
 
-h8 {
-  color: red;
+.font-gagal {
+  display: flex;
+  justify-content: center;
   text-align: center;
+  font-size: small;
+  color: red;
 }
 
 .form button:hover {
   background: #F1C27B;
 }
+
 table {
   font-size: 10px;
 }
+
+.social-icons {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin: 0 2px;
+  color: #FFE4A7;
+  font-size: 24px;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 1px;
+  font-size: 14px;
+  color: #999999;
+}
+
 /*Responsive*/
 @media screen and (max-width: 500px) {
   .form .column {

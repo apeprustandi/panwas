@@ -3,6 +3,7 @@
 
 <head>
   <link rel="icon" type="image/svg+xml" href="asset/icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <title>Panwaslu Kecamatan Cibinong</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,22 +13,39 @@
 
 <body>
   <section class="container">
-    <div class="centered-image"><img src="asset/logo.png" alt="Logo" /></div>
-    <center>
-      <H5>Bersama Rakyat Awasi Pemilu<br>Bersama Bawaslu Tegakkan Keadilan Pemilu</H5>
-    </center>
-    <form action="#" class="form">
-      <div class="input-box">
-        <button type="submit" id="submit-btn" onclick="window.location.href='absen.html'">ABSEN PIKET</button>
-        <button type="submit" id="submit-btn"
-          onclick="window.location.href='https://www.twibbonize.com/panwaslucibinong'">TWIBBON</button>
-        <button type="submit" id="submit-btn"
-          onclick="window.location.href='https://www.example.com/dokumentasi'">DOKUMENTASI
-        </button>
-        <button type="submit" id="submit-btn" onclick="window.location.href='absen.html'">ABSEN PIKET</button>
+    <form class="form">
+
+      <div class="centered-image"><img src="asset/logo.png" alt="Logo" /></div>
+      <h7 class="font-lain">Bersama Rakyat Awasi Pemilu Bersama Bawaslu Tegakkan Keadilan Pemilu</h7>
+
+      <button type="submit" formaction="https://forms.gle/FudTpWCfAZKwbYQw5" class="link-btn">LAPORAN PKD</button>
+      <button type="submit" formaction="absen.html" class="link-btn">ABSEN PIKET</button>
+      <button type="submit" formaction="https://www.twibbonize.com/panwaslucibinong" class="link-btn">TWIBBON</button>
+      <button type="submit"
+        formaction="https://drive.google.com/drive/folders/1re4cZ5-8pBwW4VJd0hAQMkUXBX9_B-rtthYjnyoTrm7W9ucaU3ul7C2JyKu7nXMpXOGUpNqi?usp=sharing"
+        class="link-btn">DOKUMENTASI</button>
+      <button type="submit" formaction="profile.html" class="link-btn">PROFIL PANWAS
+        CIBINONG</button>
+
+      <div class="social-icons">
+        <a href="https://www.facebook.com/your-facebook-profile" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/your-instagram-profile" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:your-email@example.com"><i class="far fa-envelope"></i></a>
       </div>
+
+      <div class="copyright">
+        &copy; <span id="current-year"></span> Dunia Kedol
+      </div>
+
     </form>
   </section>
 </body>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    var currentYear = new Date().getFullYear();
+    var yearElement = document.getElementById('current-year');
+    yearElement.textContent = currentYear;
+  });
+</script>
 
 </html>

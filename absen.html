@@ -45,11 +45,9 @@
       </div>
       <div class="column">
         <div class="input-box">
-          <center>
-            <h7 id="waktu-piket"></h7>
-            <h8 id="ip-message"> </h8>
-            <a href="jadwal.html">Lihat Jadwal</a>
-          </center>
+          <h7 class="font-lain" id="waktu-piket"></h7>
+          <h8 class="font-gagal" id="ip-message"> </h8>
+          <a class="font-lain" href="jadwal.html">Lihat Jadwal</a>
         </div>
       </div>
       <div class="input-box-camera">
@@ -92,7 +90,7 @@
 
     var currentDate = new Date();
     var formattedDate = currentDate.toISOString().split("T")[0];
-    var waktuPiket = "Waktu Absen: " + waktuFormatted + " | " + formattedDate + "\n";
+    var waktuPiket = "Waktu Absen " + waktuFormatted + " | " + formattedDate + "\n";
     inputWaktuPiket.innerText = waktuPiket;
 
     function submitForm(event) {

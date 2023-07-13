@@ -18,7 +18,7 @@
       <div class="centered-image"><img src="asset/logo.png" alt="Logo" /></div>
       <h7 class="font-lain">Bersama Rakyat Awasi Pemilu Bersama Bawaslu Tegakkan Keadilan Pemilu</h7>
 
-      <button type="submit" formaction="https://forms.gle/FudTpWCfAZKwbYQw5" class="link-btn">LAPORAN PKD</button>
+      <button id="laporan-pkd-btn" type="button" class="link-btn">LAPORAN PKD</button>
       <button type="submit" formaction="absen.html" class="link-btn">ABSEN PIKET</button>
       <button type="submit" formaction="https://www.twibbonize.com/panwaslucibinong" class="link-btn">TWIBBON</button>
       <button type="submit"
@@ -28,9 +28,9 @@
         CIBINONG</button>
 
       <div class="social-icons">
-        <a href="https://www.facebook.com/your-facebook-profile" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://facebook.com/panwaslu.cibinong" target="_blank"><i class="fab fa-facebook"></i></a>
         <a href="https://www.instagram.com/your-instagram-profile" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="mailto:your-email@example.com"><i class="far fa-envelope"></i></a>
+        <a href="mailto:panwaslukec.cibinong@gmail.com"><i class="far fa-envelope"></i></a>
       </div>
 
       <div class="copyright">
@@ -41,6 +41,17 @@
   </section>
 </body>
 <script>
+  const laporanPkdBtn = document.getElementById('laporan-pkd-btn');
+  laporanPkdBtn.addEventListener('click', function () {
+    const enteredPassword = prompt('Masukkan password:');
+
+    if (enteredPassword === 'Panwas123') {
+      window.location.href = 'https://forms.gle/FudTpWCfAZKwbYQw5';
+    } else {
+      alert('Password salah !!!');
+    }
+  });
+
   window.addEventListener('DOMContentLoaded', function () {
     var currentYear = new Date().getFullYear();
     var yearElement = document.getElementById('current-year');

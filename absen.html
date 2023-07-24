@@ -54,10 +54,11 @@
       </div>
       <button type="submit" id="submit-btn" disabled>Absen Sekarang</button>
       <h7 class="font-lain" id="output"></h7>
-      <!-- <button type="button" onclick="resetLocalStorage()">Reset Data Absen</button> -->
+      <button type="button" onclick="resetLocalStorage()">Reset Data Absen</button>
     </form>
   </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
   var hasilabsen = JSON.parse(localStorage.getItem('hasilabsen')) || [];
   function displayHasilAbsen() {
@@ -71,6 +72,17 @@
 
   function saveDataToLocalStorage() {
     localStorage.setItem('hasilabsen', JSON.stringify(hasilabsen));
+  }
+
+  function popupku(status,kata) {
+    Swal.fire({
+      position: 'top-end',
+      icon: status,
+      title: 'Absen',
+      text: kata,
+      showConfirmButton: false,
+      timer: 2000
+    })
   }
 
   function resetLocalStorage() {
@@ -137,7 +149,7 @@
 
     if (isDateAlreadyExists) {
       displayHasilAbsen();
-      alert('Anda sudah absen pada tanggal ini.');
+      popupku('warning','Anda sudah absen pada tanggal ini.');
     } else {
       var data = {
         nama: nama,
@@ -149,6 +161,7 @@
       outputElement.innerHTML = `Absen Sukses!!<br>${data.nama} | ${formattedDate}`
       saveDataToLocalStorage();
       displayHasilAbsen();
+      popupku('success','Berhasil melakukan absen');
     }
   }
 }

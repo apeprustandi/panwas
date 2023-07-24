@@ -120,6 +120,13 @@ body {
   text-align: center;
   font-size: small;
 }
+.font-sukses {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: small;
+  color: green;
+}
 
 .font-gagal {
   display: flex;

@@ -17,7 +17,7 @@
     <form action="#" class="form" onsubmit="submitForm(event)">
       <div class="input-box">
         <label>Nama Lengkap</label>
-        <input id="nama" type="text" placeholder="Masukkan nama lengkap" required />
+        <input id="nama" type="text" placeholder="Nama lengkap" required />
       </div>
       <div class="column">
         <div class="input-box address">
@@ -47,29 +47,51 @@
         <div class="input-box">
           <h7 class="font-lain" id="waktu-piket"></h7>
           <h8 class="font-gagal" id="ip-message"> </h8>
-          <a class="font-lain" href="jadwal.html">Lihat Jadwal</a>
         </div>
       </div>
       <div class="input-box-camera">
         <video id="camera" width="150" height="150" autoplay></video>
       </div>
       <button type="submit" id="submit-btn" disabled>Absen Sekarang</button>
+      <h7 class="font-lain" id="output"></h7>
+      <!-- <button type="button" onclick="resetLocalStorage()">Reset Data Absen</button> -->
     </form>
   </section>
 
   <script>
+  var hasilabsen = JSON.parse(localStorage.getItem('hasilabsen')) || [];
+  function displayHasilAbsen() {
+    var outputElement = document.getElementById('output');
+    var hasilAbsenText = '';
+    hasilabsen.forEach(function (data) {
+      hasilAbsenText += `${data.nama} | ${data.jabatan} | ${data.waktuAbsen}<br>`;
+    });
+    outputElement.innerHTML = hasilAbsenText;
+  }
+
+  function saveDataToLocalStorage() {
+    localStorage.setItem('hasilabsen', JSON.stringify(hasilabsen));
+  }
+
+  function resetLocalStorage() {
+      localStorage.removeItem('hasilabsen');
+      hasilabsen = []; // Clear the data in the array as well
+      var outputElement = document.getElementById('output');
+      outputElement.innerHTML = 'Data absen sudah di reset';
+    }
+
     function getIP(callback) {
       const url = 'https://api.ipify.org?format=json';
       fetch(url)
         .then(response => response.json())
         .then(data => {
-          const ip = data.ip;
+          const ip = data.ip.split('.')[0]
           callback(ip);
         });
     }
 
     function checkIP() {
-      const allowedIP = '114.124.238.240';
+      const allowedIP = '114';
       const ipMessage = document.getElementById('ip-message');
       getIP(ip => {
         if (ip !== allowedIP) {
@@ -94,16 +116,41 @@
     inputWaktuPiket.innerText = waktuPiket;
 
     function submitForm(event) {
-      event.preventDefault(); // Mencegah form untuk melakukan pengiriman secara normal
-      var nama = document.getElementById('nama').value;
-      var jabatan = document.getElementById('jabatan').value;
+  event.preventDefault(); // Prevent the form from submitting normally
 
-      if (nama === '' || jabatan === '') {
-        alert('Mohon lengkapi semua field sebelum mengirim.');
-      } else {
-        window.location.href = 'berhasil.html';
-      }
+  var nama = document.getElementById('nama').value;
+  var jabatan = document.getElementById('jabatan').value;
+
+  if (nama === '' || jabatan === 'Pilih Jabatan') {
+    alert('Mohon lengkapi sebelum mengirim.');
+  } else {
+    var currentDate = new Date();
+    var formattedDate = currentDate.toISOString().split("T")[0];
+    var jam = currentDate.getHours();
+    var menit = currentDate.getMinutes();
+    var waktuFormatted = (jam < 10 ? "0" + jam : jam) + ":" + (menit < 10 ? "0" + menit : menit);
+    var waktuPiket = "Waktu Absen " + waktuFormatted + " | " + formattedDate + "\n";
+    // Check if the formattedDate already exists in hasilabsen
+    var isDateAlreadyExists = hasilabsen.some(function(data) {
+      return data.waktuAbsen.includes(formattedDate);
+    });
+
+    if (isDateAlreadyExists) {
+      alert('Anda sudah absen pada tanggal ini.');
+    } else {
+      var data = {
+        nama: nama,
+        jabatan: jabatan,
+        waktuAbsen: `${formattedDate} | ${waktuFormatted}`
+      };
+      hasilabsen.push(data); // Add the new data to the hasilabsen array
+      var outputElement = document.getElementById('output');
+      outputElement.innerHTML = `Absen Sukses!!<br>${data.nama} | ${formattedDate}`
+      saveDataToLocalStorage();
+      displayHasilAbsen();
     }
+  }
+}
 
     navigator.mediaDevices.getUserMedia({ video: true })
       .then(function (stream) {
@@ -114,6 +161,7 @@
       .catch(function (error) {
         console.log('Unable to access the camera: ', error);
       });
+      
   </script>
 </body>
 

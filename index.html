@@ -40,17 +40,29 @@
     </form>
   </section>
 </body>
-<script>
-  const laporanPkdBtn = document.getElementById('laporan-pkd-btn');
-  laporanPkdBtn.addEventListener('click', function () {
-    const enteredPassword = prompt('Masukkan password:');
 
-    if (enteredPassword === 'Panwas123') {
-      window.location.href = 'https://forms.gle/FudTpWCfAZKwbYQw5';
-    } else {
-      alert('Password salah !!!');
-    }
-  });
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const laporanPkdBtn = document.getElementById('laporan-pkd-btn');
+    laporanPkdBtn.addEventListener('click', async function () {
+      const { value: password } = await Swal.fire({
+        title: 'Password Laporan',
+        input: 'password',
+        inputPlaceholder: 'Enter your password',
+        inputAttributes: {
+          maxlength: 10,
+          autocapitalize: 'off',
+          autocorrect: 'off'
+        }
+      });
+
+      if (password === 'Panwas123') {
+        window.location.href = 'https://forms.gle/FudTpWCfAZKwbYQw5';
+      } else if (password) {
+        Swal.fire('Password salah !!!');
+      }
+    });
 
   window.addEventListener('DOMContentLoaded', function () {
     var currentYear = new Date().getFullYear();

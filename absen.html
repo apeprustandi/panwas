@@ -4,41 +4,216 @@
 <head>
   <link rel="icon" type="image/svg+xml" href="asset/icon.svg">
   <title>Panwaslu Kecamatan Cibinong</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    /* Import Google font - Poppins */
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background: #FFE4A7;
+    }
+
+    .container {
+      position: relative;
+      max-width: 700px;
+      width: 100%;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .centered-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .centered-image img {
+      max-width: 40%;
+      max-height: 40%;
+    }
+
+    .container header {
+      font-size: 1.5rem;
+      color: #333;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .container .form {
+      margin-top: 20px;
+    }
+
+    .form .input-box {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .input-box-camera {
+      margin-top: 20px;
+      width: 150px;
+      height: 150px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .input-box label {
+      color: #333;
+    }
+
+    .form :where(.input-box input, .select-box) {
+      position: relative;
+      height: 50px;
+      width: 100%;
+      outline: none;
+      font-size: 1rem;
+      color: #707070;
+      margin-top: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 0 15px;
+    }
+
+    .input-box input:focus {
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .form .column {
+      display: flex;
+      column-gap: 15px;
+    }
+
+    .select-box select {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      border: none;
+      color: #707070;
+      font-size: 1rem;
+    }
+
+    .form button {
+      height: 55px;
+      width: 100%;
+      color: #000;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 15px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #FFE4A7;
+      border-radius: 8px;
+    }
+
+    .font-lain,
+    .font-sukses,
+    .font-gagal {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      font-size: small;
+      color: green;
+    }
+
+    .font-sukses {
+      color: green;
+    }
+
+    .font-gagal {
+      color: red;
+    }
+
+    .form button:hover {
+      background: #F1C27B;
+    }
+
+    table {
+      font-size: 10px;
+    }
+
+    .social-icons {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin: 0 2px;
+      color: #FFE4A7;
+      font-size: 24px;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 1px;
+      font-size: 14px;
+      color: #999999;
+    }
+
+    /*Responsive*/
+    @media screen and (max-width: 500px) {
+      .form .column {
+        flex-wrap: wrap;
+      }
+
+      .form :where(.gender-option, .gender) {
+        row-gap: 15px;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <section class="container">
-    <div class="centered-image"><img src="asset/logo.png" alt="Logo" /></div>
+    <div class="centered-image"><img
+        src="https://jombang.bawaslu.go.id/wp-content/uploads/2019/04/Logo-Bawaslu-2018-Icon-PNG-HD.png" width="70"
+        alt="Logo"></div>
     <!-- <header>ABSENSI PIKET</header> -->
     <form action="#" class="form" onsubmit="submitForm(event)">
-      <div class="input-box">
-        <label>Nama Lengkap</label>
-        <input id="nama" type="text" placeholder="Nama lengkap" required />
+      <div class="column">
+        <div class="input-box address">
+          <label for="nama">Nama</label>
+          <div class="select-box">
+            <select id="nama" required>
+              <option hidden>Pilih Nama</option>
+              <option hidden>Pilih Nama</option>
+              <% dataUser.forEach((dataUsers, i)=> { %>
+                <option>
+                  <%= dataUsers['NAMA'] %>
+                </option>
+                <% }) %>
+            </select>
+          </div>
+        </div>
       </div>
       <div class="column">
         <div class="input-box address">
-          <label>Jabatan</label>
+          <label for="jabatan">Jabatan</label>
           <div class="select-box">
             <select id="jabatan" required>
               <option hidden>Pilih Jabatan</option>
-              <option>PKD Batulawang</option>
-              <option>PKD Ciburial</option>
-              <option>PKD Cikangkareng</option>
-              <option>PKD Cimaskara</option>
-              <option>PKD Girijaya</option>
-              <option>PKD Hamerang</option>
-              <option>PKD Mekarmukti</option>
-              <option>PKD Padasuka</option>
-              <option>PKD Pamoyanan</option>
-              <option>PKD Pananggapan</option>
-              <option>PKD Panyindangan</option>
-              <option>PKD Sukajadi</option>
-              <option>PKD Sukamekar</option>
-              <option>PKD Wargaluyu</option>
+              <option>Anggota</option>
+              <option>Sekretariat</option>
+              <option>Panwaslu Desa</option>
             </select>
           </div>
         </div>
@@ -47,70 +222,81 @@
         <div class="input-box">
           <h7 class="font-lain" id="waktu-piket"></h7>
           <h8 class="font-gagal" id="ip-message"> </h8>
+          <h7 class="font-lain" id="output"></h7>
         </div>
       </div>
       <div class="input-box-camera">
         <video id="camera" width="150" height="150" autoplay></video>
       </div>
       <button type="submit" id="submit-btn" disabled>Absen Sekarang</button>
-      <h7 class="font-lain" id="output"></h7>
-      <button type="button" onclick="resetLocalStorage()">Reset Data Absen</button>
+      <!-- <button type="button" onclick="resetLocalStorage()">Reset Data Absen</button> -->
     </form>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-  var hasilabsen = JSON.parse(localStorage.getItem('hasilabsen')) || [];
-  function displayHasilAbsen() {
-    var outputElement = document.getElementById('output');
-    var hasilAbsenText = '';
-    hasilabsen.forEach(function (data) {
-      hasilAbsenText += `${data.nama} | ${data.jabatan} | ${data.waktuAbsen}<br>`;
-    });
-    outputElement.innerHTML = hasilAbsenText;
-  }
 
-  function saveDataToLocalStorage() {
-    localStorage.setItem('hasilabsen', JSON.stringify(hasilabsen));
-  }
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function (stream) {
+        var video = document.getElementById('camera');
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch(function (error) {
+        console.log('Unable to access the camera: ', error);
+      });
 
-  function popupku(status,kata) {
-    Swal.fire({
-      position: 'top-end',
-      icon: status,
-      title: 'Absen',
-      text: kata,
-      showConfirmButton: false,
-      timer: 2000
-    })
-  }
+    var hasilabsen = JSON.parse(localStorage.getItem('hasilabsen')) || [];
+    function displayHasilAbsen() {
+      var outputElement = document.getElementById('output');
+      var hasilAbsenText = '';
+      hasilabsen.forEach(function (data) {
+        hasilAbsenText += `${data.nama} | ${data.jabatan}<br>`;
+      });
+      outputElement.innerHTML = hasilAbsenText;
+    }
 
-  function resetLocalStorage() {
+    function saveDataToLocalStorage() {
+      localStorage.setItem('hasilabsen', JSON.stringify(hasilabsen));
+    }
+
+    function resetLocalStorage() {
       localStorage.removeItem('hasilabsen');
       hasilabsen = []; // Clear the data in the array as well
       var outputElement = document.getElementById('output');
       outputElement.innerHTML = 'Data absen sudah di reset';
     }
 
+    function popupku(logo, status, kata) {
+      Swal.fire({
+        icon: logo,  // Set the success icon
+        title: status,  // Title of the modal
+        text: kata,  // Your success message
+        confirmButtonColor: '#F1C27B',  // Set color button
+        confirmButtonText: 'OK',  // Text on the confirm button
+      });
+    }
+
     function getIP(callback) {
-      const url = 'https://api.ipify.org?format=json';
+      const url = 'https://ipapi.co/json';
       fetch(url)
         .then(response => response.json())
         .then(data => {
-          const ip = data.ip.split('.')[0]
+          const ip = data.org;
           callback(ip);
         });
     }
 
     function checkIP() {
-      const allowedIP = '180';
+      const allowedIP = 'PT. Telekomunikasi Selular';
       const ipMessage = document.getElementById('ip-message');
       getIP(ip => {
-        if (ip !== allowedIP) {
+        // if (ip !== allowedIP) {
+        if (allowedIP == allowedIP) {
+          document.getElementById('submit-btn').disabled = false;
+        } else {
           ipMessage.innerText = 'Anda sedang tidak dikantor !!!\n';
           document.getElementById('submit-btn').disabled = true;
-        } else {
-          document.getElementById('submit-btn').disabled = false;
         }
       });
     }
@@ -128,54 +314,56 @@
     inputWaktuPiket.innerText = waktuPiket;
 
     function submitForm(event) {
-  event.preventDefault(); // Prevent the form from submitting normally
+      event.preventDefault(); // Prevent the form from submitting normally
 
-  var nama = document.getElementById('nama').value;
-  var jabatan = document.getElementById('jabatan').value;
+      var nama = document.getElementById('nama').value;
+      var jabatan = document.getElementById('jabatan').value;
 
-  if (nama === '' || jabatan === 'Pilih Jabatan') {
-    alert('Mohon lengkapi sebelum mengirim.');
-  } else {
-    var currentDate = new Date();
-    var formattedDate = currentDate.toISOString().split("T")[0];
-    var jam = currentDate.getHours();
-    var menit = currentDate.getMinutes();
-    var waktuFormatted = (jam < 10 ? "0" + jam : jam) + ":" + (menit < 10 ? "0" + menit : menit);
-    var waktuPiket = "Waktu Absen " + waktuFormatted + " | " + formattedDate + "\n";
-    // Check if the formattedDate already exists in hasilabsen
-    var isDateAlreadyExists = hasilabsen.some(function(data) {
-      return data.waktuAbsen.includes(formattedDate);
-    });
+      if (nama === '' || jabatan === 'Pilih Jabatan') {
+        alert('Mohon lengkapi sebelum mengirim.');
+      } else {
+        var currentDate = new Date();
+        var formattedDate = currentDate.toISOString().split("T")[0];
+        var jam = currentDate.getHours();
+        var menit = currentDate.getMinutes();
+        var waktuFormatted = (jam < 10 ? "0" + jam : jam) + ":" + (menit < 10 ? "0" + menit : menit);
+        var waktuPiket = "Waktu Absen " + waktuFormatted + " | " + formattedDate + "\n";
+        // Check if the formattedDate already exists in hasilabsen
+        var isDateAlreadyExists = hasilabsen.some(function (data) {
+          return data.waktuAbsen.includes(formattedDate);
+        });
 
-    if (isDateAlreadyExists) {
-      displayHasilAbsen();
-      popupku('warning','Anda sudah absen pada tanggal ini.');
-    } else {
-      var data = {
-        nama: nama,
-        jabatan: jabatan,
-        waktuAbsen: `${formattedDate} | ${waktuFormatted}`
-      };
-      hasilabsen.push(data); // Add the new data to the hasilabsen array
-      var outputElement = document.getElementById('output');
-      outputElement.innerHTML = `Absen Sukses!!<br>${data.nama} | ${formattedDate}`
-      saveDataToLocalStorage();
-      displayHasilAbsen();
-      popupku('success','Berhasil melakukan absen');
+        function sendData(nama, jabatan) {
+          filterNama = nama.replace(/ /g, "+");
+          filterJabatan = jabatan.replace(/ /g, "+");
+          const url = `https://docs.google.com/forms/d/e/1FAIpQLSc2Ditb1Nk2IQ4IyichLHk7bCemSMOCmYzXO_ipSSSCfurG3A/formResponse?usp=pp_url&entry.1936318727=${filterNama}&entry.618290187=${filterJabatan}&entry.639629710=Hadir`;
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+              const ip = data;
+            });
+        }
+
+        if (isDateAlreadyExists) {
+          displayHasilAbsen();
+          popupku('warning', 'Gagal', 'Anda sudah absen pada tanggal ini.');
+        } else {
+          var data = {
+            nama: nama,
+            jabatan: jabatan,
+            waktuAbsen: `${formattedDate} | ${waktuFormatted}`
+          };
+          hasilabsen.push(data); // Add the new data to the hasilabsen array
+          var outputElement = document.getElementById('output');
+          outputElement.innerHTML = `Absen Sukses!!<br>${data.nama} | ${formattedDate}`
+          saveDataToLocalStorage();
+          displayHasilAbsen();
+          sendData(nama, jabatan)
+          popupku('success', 'Success', 'Berhasil melakukan absen');
+        }
+      }
     }
-  }
-}
 
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(function (stream) {
-        var video = document.getElementById('camera');
-        video.srcObject = stream;
-        video.play();
-      })
-      .catch(function (error) {
-        console.log('Unable to access the camera: ', error);
-      });
-      
   </script>
 </body>
 
